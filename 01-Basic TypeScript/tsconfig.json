@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    // กำหนดรูปแบบระบบโมดูลให้สอดคล้องกับ Node.js ยุคใหม่ (ESM)
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    
+    // ตั้งค่าตำแหน่งโฟลเดอร์สำหรับอ่านและบันทึกไฟล์โค้ด
+    "rootDir": "./",
+    "outDir": "./dist",
+
+    // รองรับการทำงานร่วมกับโมดูลระบบเก่าและสร้าง Source Map สำหรับดีบั๊ก
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // ระบบตรวจสอบประเภทข้อมูลที่เข้มงวดเพื่อความปลอดภัยของโค้ด
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "strict": true,
+    
+    // ตั้งค่าสำหรับใช้งาน React ร่วมกับ TypeScript และเพิ่มความเร็วในการคอมไพล์
+    "jsx": "react-jsx",
+    "verbatimModuleSyntax": false,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "skipLibCheck": true
+  }
+}
