@@ -14,7 +14,6 @@ function MovieDetailPage() {
 
   return (
     <Box sx={{ bgcolor: "#121212", minHeight: "100vh", color: "#ffffff"}}>
-      
       <Box sx={{ bgcolor: "#1a1a1a", py: 1.5 }}>
         <Container maxWidth="lg">
           <Button 
@@ -69,14 +68,14 @@ function MovieDetailPage() {
           <Box component="img" src={movie.img} alt={movie.title} sx={{ width: { xs: "100%", sm: 220 }, height: 320, objectFit: "cover" }} />
           
           {/* กล่องวิดีโอตัวอย่างตรงกลางพร้อมปุ่ม Play เด้งซ้อนด้านบน */}
-          <Box sx={{ flexGrow: 1, position: "relative", minWidth: { xs: "100%", sm: 300 }, height: 320, backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(${movie.img})`, backgroundSize: "cover", backgroundPosition: "center", display: "flex", alignItems: "flex-end", p: 3 }}>
+          <Box sx={{ flexGrow: 1, position: "relative", minWidth: { xs: "100%", sm: 300 }, maxWidth: 700, height: 320, backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(${movie.img})`, backgroundSize: "cover", backgroundPosition: "center", display: "flex", alignItems: "flex-end", p: 3 }}>
             <Button startIcon={<SvgIcon sx={{ fontSize: 40 }}><path d="M8 5v14l11-7z" /></SvgIcon>} sx={{ color: "#ffffff", fontSize: "20px", fontWeight: "bold", textTransform: "none", "&:hover": { bgcolor: "transparent" } }}>
               Play trailer <Typography variant="caption" sx={{ color: "#aaa", ml: 1, fontSize: "14px" }}>{movie.trailerDuration}</Typography>
             </Button>
           </Box>
 
           {/* ปุ่มสถิติจำนวนมีเดียฝั่งขวามือสองกล่อง */}
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, width: { xs: "100%", sm: 160 } }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, width: { xs: "100%", sm: 200 } }}>
             <PhotosCount photosCount={movie.photoCount} />
             <VideoCount videoCount={movie.videoCount} />
           </Box>

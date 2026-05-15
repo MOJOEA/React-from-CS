@@ -13,8 +13,8 @@ import TestPage from './page/Test/page.js';
 import TestDetailPage from './page/Test/[id]/page.js';
 
 import MoviePage from './page/Movie/page.js';
-import MovieDetailPage from './page/Movie/[id]/page1.js';
-import MovieTrailer from './page/Movie/[id]/page2.js';
+import MovieDetailPage from './page/Movie/[id]/page.js';
+import MovieTrailer from './page/Movie/[id]/trailer/page.js';
 
 const routers = createBrowserRouter([
   {

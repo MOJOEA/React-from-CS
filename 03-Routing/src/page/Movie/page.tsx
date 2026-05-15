@@ -6,17 +6,15 @@ import CardMovie from "../../components/header/crad/Cradmovie";
 import getMovies from "../../database/movies"; 
 import getActors from "../../database/actors";
 
-import { useNavigate } from "react-router-dom";
-
 function MoviePage() {
   const movies = getMovies(); 
   const actors = getActors();
 
   return (
     <Box sx={{ bgcolor: "#000000", minHeight: "100vh", color: "#ffffff", py: 4 }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ mt: 8 , mb: 8 }}>
         
-        <Box sx={{ mb: 6 }}>
+        <Box sx={{ mb: 4 }}>
           <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
             <Box sx={{ width: 4, height: 28, bgcolor: "#f5c518", mr: 1.5, borderRadius: 0.5 }} />
             <Typography variant="h5" sx={{ fontWeight: "bold" }}>

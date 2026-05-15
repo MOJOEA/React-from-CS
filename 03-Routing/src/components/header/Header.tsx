@@ -6,7 +6,7 @@ function Header() {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static" sx={{ bgcolor: "#505050" }} >
           <Toolbar>
             <IconButton
               size="large"
@@ -17,13 +17,17 @@ function Header() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Game of Thrones
+            <Typography variant="h6" component="div" sx={{ 
+              flexGrow: 1,
+              fontWeight: "bold",
+              color: "#f5c518",
+              letterSpacing: 1,}}>
+                IMDB
             </Typography>
-            <Button color="inherit">HOME</Button>
-            <Button color="inherit">STORY</Button>
-            <Button color="inherit">GALLERY</Button>
-            <Button color="inherit">CHARACTERS</Button>
+            <Button color="inherit" sx={{ color: "#fff" }}>HOME</Button>
+            <Button color="inherit" sx={{ color: "#fff" }}>STORY</Button>
+            <Button color="inherit" sx={{ color: "#fff" }}>GALLERY</Button>
+            <Button color="inherit" sx={{ color: "#fff" }}>CHARACTERS</Button>
           </Toolbar>
         </AppBar>
       </Box>

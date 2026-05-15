@@ -1,7 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Box, Container, Typography, Button, Divider, SvgIcon } from "@mui/material";
-// นำเข้าข้อมูล Mock Data ถอยหลัง 3 ชั้นจากโฟลเดอร์ [id] ไปหา src/database/data.tsx
-import getMovies from "../../../database/movies";
+
+import { PhotosCount, VideoCount } from "../../../../components/header/box/movie.box";
+
+import getMovies from "../../../../database/movies";
 
 function MovieDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -13,8 +15,6 @@ function MovieDetailPage() {
 
   return (
     <Box sx={{ bgcolor: "#121212", minHeight: "100vh", color: "#ffffff", pb: 6 }}>
-      
-      {/* 1. ปุ่มย้อนกลับสีเหลืองเด่นด้านบนสุด (< Back) */}
       <Box sx={{ bgcolor: "#1a1a1a", py: 1.5 }}>
         <Container maxWidth="lg">
           <Button 
@@ -32,8 +32,7 @@ function MovieDetailPage() {
         </Container>
       </Box>
 
-      <Container maxWidth="lg" sx={{ mt: 3 }}>
-        
+      <Container maxWidth="lg" sx={{ mt: 8, mb: 8, backgroundColor: "#1c1c1c", p: 3, borderRadius: 1   }}>
         {/* 2. บรรทัดหัวข้อชื่อหลักและแท็บคะแนนความนิยมย่อย */}
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 2, flexWrap: "wrap", gap: 2 }}>
           <Box>
@@ -57,50 +56,22 @@ function MovieDetailPage() {
           </Box>
         </Box>
 
-        {/* 3. แผงแสดงสื่อมีเดีย Layout IMDb (ภาพโปรไฟล์ซ้าย + กล่องวิดีโอกลาง + ปุ่มสถิติขวา) */}
-        <Box sx={{ display: "flex", gap: 0.5, bgcolor: "#1a1a1a", p: 0.5, borderRadius: 1, mb: 3, flexWrap: { xs: "wrap", md: "nowrap" } }}>
-          {/* รูปโปรไฟล์นักแสดงหรือโปสเตอร์หลักแนวตั้ง */}
-          <Box 
-            component="img" 
-            src={movie.img} 
-            alt={movie.title} 
-            sx={{ width: { xs: "100%", sm: 220 }, height: 320, objectFit: "cover" }} 
-          />
+        {/* 3. แผงแสดงสื่อมีเดียหลัก (Poster + Trailer Backdrop + Media Counts) */}
+        <Box sx={{ display: "flex", gap: 0.5, bgcolor: "#1a1a1a", p: 0.5, borderRadius: 1, mb: 3, minHeight: 320, flexWrap: { xs: "wrap", md: "nowrap" } }}>
+          {/* ภาพโปสเตอร์แนวตั้งซ้ายมือ */}
+          <Box component="img" src={movie.img} alt={movie.title} sx={{ width: { xs: "100%", sm: 220 }, height: 320, objectFit: "cover" }} />
           
-          {/* กล่องเครื่องเล่นวิดีโอหลักตรงกลาง พร้อมปุ่มเล่น Trailer ทับบนฉากหลัง */}
-          <Box sx={{ 
-            flexGrow: 1, 
-            position: "relative", 
-            minWidth: { xs: "100%", sm: 300 }, 
-            height: 320, 
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url(${movie.img})`, 
-            backgroundSize: "cover", 
-            backgroundPosition: "center", 
-            display: "flex", 
-            alignItems: "flex-end", 
-            p: 3 
-          }}>
-            <Button 
-              startIcon={<SvgIcon sx={{ fontSize: 40 }}><path d="M8 5v14l11-7z" /></SvgIcon>} 
-              sx={{ color: "#ffffff", fontSize: "18px", fontWeight: "bold", textTransform: "none", textAlign: "left", display: "block" }}
-            >
-              <Typography variant="body1" sx={{ fontWeight: "bold" }}>ON THE SCENE</Typography>
-              <Typography variant="caption" sx={{ color: "#ccc", display: "block", textTransform: "none" }}>
-                Watch {movie.stars && movie.stars[0] ? movie.stars[0] : "Trailer"} ({movie.trailerDuration || "2:30"})
-              </Typography>
+          {/* กล่องวิดีโอตัวอย่างตรงกลางพร้อมปุ่ม Play เด้งซ้อนด้านบน */}
+          <Box sx={{ flexGrow: 1, position: "relative", minWidth: { xs: "100%", sm: 300 }, maxWidth: 700, height: 320, backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(${movie.img})`, backgroundSize: "cover", backgroundPosition: "center", display: "flex", alignItems: "flex-end", p: 3 }}>
+            <Button startIcon={<SvgIcon sx={{ fontSize: 40 }}><path d="M8 5v14l11-7z" /></SvgIcon>} sx={{ color: "#ffffff", fontSize: "20px", fontWeight: "bold", textTransform: "none", "&:hover": { bgcolor: "transparent" } }}>
+              Play trailer <Typography variant="caption" sx={{ color: "#aaa", ml: 1, fontSize: "14px" }}>{movie.trailerDuration}</Typography>
             </Button>
           </Box>
 
-          {/* แผงปุ่มนับจำนวนมีเดียฝั่งขวาสองกล่องแนวดิ่ง */}
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, width: { xs: "100%", sm: 140 } }}>
-            <Box sx={{ flex: 1, bgcolor: "#252525", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", cursor: "pointer", "&:hover": { bgcolor: "#333" }, p: 2 }}>
-              <SvgIcon sx={{ fontSize: 26, mb: 1, color: "#fff" }}><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8 12.5v-9l6 4.5-6 4.5z" /></SvgIcon>
-              <Typography variant="caption" sx={{ fontWeight: "bold", color: "#fff" }}>{movie.videoCount || "12"} VIDEOS</Typography>
-            </Box>
-            <Box sx={{ flex: 1, bgcolor: "#252525", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", cursor: "pointer", "&:hover": { bgcolor: "#333" }, p: 2 }}>
-              <SvgIcon sx={{ fontSize: 26, mb: 1, color: "#fff" }}><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" /></SvgIcon>
-              <Typography variant="caption" sx={{ fontWeight: "bold", color: "#fff" }}>{movie.photoCount || "99"} PHOTOS</Typography>
-            </Box>
+          {/* ปุ่มสถิติจำนวนมีเดียฝั่งขวามือสองกล่อง */}
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, width: { xs: "100%", sm: 200 } }}>
+            <PhotosCount photosCount={movie.photoCount} />
+            <VideoCount videoCount={movie.videoCount} />
           </Box>
         </Box>
 
