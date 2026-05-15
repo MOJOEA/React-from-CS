@@ -1,13 +1,11 @@
 import { Box, Container, Card, CardHeader, CardContent, CardActions, TextField, Button, Typography } from "@mui/material";
+
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
-import Header from "./components/header/Header";
 
 function App() {
   return (
     <>
-      <Header />
-      {/* เพิ่มส่วนการไล่เฉดสีพื้นหลัง (Gradient Background) เพื่อขับให้ตัวการ์ดเด่นขึ้น */}
       <Box
         sx={{
           background: '#ffffff',
