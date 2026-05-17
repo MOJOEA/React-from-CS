@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"; 
-import { Box, Container, Card, CardHeader, CardContent, CardActions, TextField, Button, Typography } from "@mui/material";
+import { Container, Card, CardHeader, CardContent, CardActions, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 function MovieDetailPage() {
@@ -7,7 +7,7 @@ function MovieDetailPage() {
     const navigate = useNavigate();
 
     function navigateTo() {
-        navigate("/movie");
+        navigate("/test5");
     }
     return (
         <Container>

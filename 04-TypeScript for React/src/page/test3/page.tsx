@@ -1,53 +1,71 @@
-import { Box, Container, Card, CardHeader, CardContent, Typography } from "@mui/material";
-import { CardActions, Button } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
-const moviesData = [
-  { id: "1", title: "House of the Dragon", description: "The story of the Targaryen civil war." },
-  { id: "2", title: "Game of Thrones", description: "Nine noble families fight for control over the mythical lands of Westeros." },
-  { id: "3", title: "A Knight of the Seven Kingdoms", description: "The adventures of Ser Duncan the Tall and Egg." }
-];
+import { useRef, useState } from "react"; // 1. นำเข้า useState เพิ่มเติม
 
 function MoviePage() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    function navigateTo(id: string) {
-        navigate(`/movie/${id}`);
-    }
+  function navigateTo(id: string) {
+    navigate(`/test3/${id}`);
+  }
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const textFieldRef = useRef<HTMLInputElement>(null);
+  const selectRef = useRef<HTMLSelectElement>(null);
+
+  // 2. เปลี่ยนตัวแปรธรรมดาให้เป็น State เพื่อให้ UI ทำการอัปเดตอัตโนมัติเมื่อค่าเปลี่ยน
+  const [textToShow, setTextToShow] = useState("Welcome to Demo Page");
+
+  function btnClickHandler() {
+    // ดึงค่าล่าสุดจากระบบอินพุตและช่องกรอกของ Material UI
+    const inputValue = inputRef.current?.value || "";
+    const textFieldValue = textFieldRef.current?.value || "";
+    const selectValue = selectRef.current?.value || "";
+
+    console.log("Input Text is " + inputValue);
+    console.log("TextField Text is " + textFieldValue);
+    console.log("Select Value is " + selectValue);
+
+    // 3. สั่งอัปเดตข้อความบนหน้าจอเมื่อทำการกดปุ่ม Run
+    setTextToShow(`Last Input: ${inputValue} | on button: ${textFieldValue} | on select: ${selectValue}`);
+  }
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
-      {/* ส่วนหัวของหน้าเว็บ */}
-      <Card sx={{ mb: 4, bgcolor: "background.paper" }}>
-        <CardHeader title="Movie Page" />
-        <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            This is the main movie page. Select a movie below to see details.
-          </Typography>
-        </CardContent>
-      </Card>
+    <>
+      {/* ข้อความตรงนี้จะเปลี่ยนทันทีตามสถานะของ State */}
+      <Typography variant="h6" sx={{ ml: 2, mt: 2}}>
+        {textToShow}
+      </Typography>
 
-      {/* 2. นำข้อมูล moviesData มาสั่ง .map() วนลูปสร้างรายการการ์ดภาพยนตร์ */}
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-        {moviesData.map((element) => (
-          <Card key={element.id} variant="outlined">
-            <CardHeader title={element.title} />
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                {element.description}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button 
-                variant="contained"
-                color="primary"
-                onClick={() => navigateTo(element.id)}
-              > View Details</Button>
-            </CardActions>
-          </Card>
-        ))}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          gap: 2, // เพิ่มระยะห่างระหว่างปุ่มให้สวยงามขึ้น
+          p: 2
+        }}
+      >
+        <input
+          ref={inputRef}
+          type="text"
+        />
+
+        <TextField
+          inputRef={textFieldRef}
+          size="small"
+        />
+
+        <select ref={selectRef}>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select>
+
+        <Button variant="contained" onClick={btnClickHandler}>
+          Run
+        </Button>
       </Box>
-    </Container>
+    </>
   );
 }
 

@@ -12,7 +12,7 @@ function MoviePage() {
     const navigate = useNavigate();
 
     function navigateTo(id: string) {
-        navigate(`/movie/${id}`);
+        navigate(`/test4/${id}`);
     }
 
   return (

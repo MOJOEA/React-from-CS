@@ -1,53 +1,37 @@
-import { Box, Container, Card, CardHeader, CardContent, Typography } from "@mui/material";
-import { CardActions, Button } from "@mui/material";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const moviesData = [
-  { id: "1", title: "House of the Dragon", description: "The story of the Targaryen civil war." },
-  { id: "2", title: "Game of Thrones", description: "Nine noble families fight for control over the mythical lands of Westeros." },
-  { id: "3", title: "A Knight of the Seven Kingdoms", description: "The adventures of Ser Duncan the Tall and Egg." }
-];
+import MovieCard from "../../components/crad/crad";
 
 function MoviePage() {
-    const navigate = useNavigate();
-
-    function navigateTo(id: string) {
-        navigate(`/movie/${id}`);
-    }
+  const navigate = useNavigate();
+  const [clickText, setClickText] = useState("null text");
+  const [inputText, setInputText] = useState("ยังไม่ได้พิมพ์อะไร");
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
-      {/* ส่วนหัวของหน้าเว็บ */}
-      <Card sx={{ mb: 4, bgcolor: "background.paper" }}>
-        <CardHeader title="Movie Page" />
-        <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            This is the main movie page. Select a movie below to see details.
-          </Typography>
-        </CardContent>
-      </Card>
+    <>
+      <MovieCard 
+        title="React" 
+        mode="null"
+        text="Easy web framework" 
+      />
 
-      {/* 2. นำข้อมูล moviesData มาสั่ง .map() วนลูปสร้างรายการการ์ดภาพยนตร์ */}
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-        {moviesData.map((element) => (
-          <Card key={element.id} variant="outlined">
-            <CardHeader title={element.title} />
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                {element.description}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button 
-                variant="contained"
-                color="primary"
-                onClick={() => navigateTo(element.id)}
-              > View Details</Button>
-            </CardActions>
-          </Card>
-        ))}
-      </Box>
-    </Container>
+      <MovieCard 
+        title="Java" 
+        mode="null"
+        text="Easy programming language" 
+      />
+
+      <MovieCard 
+        mode="null"
+        text="Programming is easy" 
+      />
+
+      <MovieCard 
+        title="No Title"
+        mode="null"
+      />
+    </>
   );
 }
 
