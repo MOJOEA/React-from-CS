@@ -9,8 +9,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import TestPage from './page/Test/page.js';
-import TestDetailPage from './page/Test/[id]/page.js';
+import TestPage from './page/test1/page.js';
+import TestDetailPage from './page/test1/[id]/page.js';
 
 
 const routers = createBrowserRouter([
@@ -22,7 +22,7 @@ const routers = createBrowserRouter([
         element: <App />
       },
       { 
-        path: "/test", 
+        path: "/test1", 
         children: [
           {
             index: true, 
