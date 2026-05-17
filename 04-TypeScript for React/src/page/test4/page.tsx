@@ -1,54 +1,41 @@
-import { Box, Container, Card, CardHeader, CardContent, Typography } from "@mui/material";
-import { CardActions, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Button, TextField } from "@mui/material";
+import { useRef, useState } from "react";
 
-const moviesData = [
-  { id: "1", title: "House of the Dragon", description: "The story of the Targaryen civil war." },
-  { id: "2", title: "Game of Thrones", description: "Nine noble families fight for control over the mythical lands of Westeros." },
-  { id: "3", title: "A Knight of the Seven Kingdoms", description: "The adventures of Ser Duncan the Tall and Egg." }
-];
+function StatePage() {
+  let inputRef = useRef<HTMLInputElement>();
 
-function MoviePage() {
-    const navigate = useNavigate();
+  // object stateData used the application
+  let stateData = new StateData();
+  // object state used for rendering component
+  let [state, setState] = useState<StateData>(new StateData());
 
-    function navigateTo(id: string) {
-        navigate(`/test4/${id}`);
-    }
+  function btnClick() {
+    stateData.firstname = inputRef.current!.value;
+    setState(stateData);
+	console.log(`stateData: ${JSON.stringify(stateData)}`);
+    console.log(`state: ${JSON.stringify(state)}`);
+  }
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
-      {/* ส่วนหัวของหน้าเว็บ */}
-      <Card sx={{ mb: 4, bgcolor: "background.paper" }}>
-        <CardHeader title="Movie Page" />
-        <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            This is the main movie page. Select a movie below to see details.
-          </Typography>
-        </CardContent>
-      </Card>
-
-      {/* 2. นำข้อมูล moviesData มาสั่ง .map() วนลูปสร้างรายการการ์ดภาพยนตร์ */}
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-        {moviesData.map((element) => (
-          <Card key={element.id} variant="outlined">
-            <CardHeader title={element.title} />
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                {element.description}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button 
-                variant="contained"
-                color="primary"
-                onClick={() => navigateTo(element.id)}
-              > View Details</Button>
-            </CardActions>
-          </Card>
-        ))}
-      </Box>
-    </Container>
+    <>
+      Demo of useState : {state.firstname}
+      <br />
+      <TextField size="small" inputRef={inputRef}></TextField>
+      <Button variant={"contained"} onClick={btnClick}>
+        Set Text
+      </Button>
+      <br />
+      {inputRef.current?.value === "x" ? <>Your text is X</> : <></>}
+    </>
   );
 }
 
-export default MoviePage;
+export default StatePage;
+
+class StateData {
+  firstname: string = "";
+  lastname: string = "";
+  age: number = 0;
+  isAdmin: boolean = false;
+  mobile = [];
+}

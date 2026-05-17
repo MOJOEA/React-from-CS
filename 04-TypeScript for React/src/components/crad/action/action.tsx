@@ -1,6 +1,7 @@
-import { CardActions, Button, TextField } from "@mui/material";
+import { Box, Card, CardHeader, CardContent, Typography, CardActions, Button, TextField } from "@mui/material";
 
-export function ButtonAction({ onBtnClick }: { onBtnClick: () => void }) {
+// 1. ฟังก์ชันสำหรับโหมดปุ่มกด
+export function ButtonAction({ onBtnClick }: { onBtnClick?: () => void }) {
   return (
     <CardActions sx={{ justifyContent: 'flex-end', p: 2 }}>
       <Button 
@@ -14,14 +15,15 @@ export function ButtonAction({ onBtnClick }: { onBtnClick: () => void }) {
   );
 }
 
-export function InputAction({ onInputChange }: { onInputChange: (value: string) => void }) {
+// 2. ฟังก์ชันสำหรับโหมดรับข้อความ
+export function InputAction({ onInputChange }: { onInputChange?: (value: string) => void }) {
   return (
     <CardActions sx={{ justifyContent: 'flex-end', p: 2 }}>
       <TextField
         fullWidth
         variant="outlined"
         placeholder="Input your text..."
-        onChange={(e) => onInputChange(e.target.value)}
+        onChange={(e) => onInputChange?.(e.target.value)}
         sx={{
           input: { color: '#fff' },
           '& .MuiOutlinedInput-root': {

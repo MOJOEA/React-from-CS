@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from './App.jsx'
-import Header from './components/header/Header.jsx'
+import Header from './components/header/Header.js'
 
 // Import Pages สำหรับ Test 1 - 6
 import Test1Page from './page/test1/page.js';
@@ -16,10 +16,8 @@ import Test3Page from './page/test3/page.js';
 import Test3DetailPage from './page/test3/[id]/page.js';
 
 import Test4Page from './page/test4/page.js';
-import Test4DetailPage from './page/test4/[id]/page.js';
 
 import Test5Page from './page/test5/page.js';
-import Test5DetailPage from './page/test5/[id]/page.js';
 
 import Test6Page from './page/test6/page.js';
 import Test6DetailPage from './page/test6/[id]/page.js';
@@ -61,7 +59,6 @@ const routers = createBrowserRouter([
         path: "/test4", 
         children: [
           { index: true, element: <Test4Page /> },
-          { path: ":id", element: <Test4DetailPage /> }
         ]
       },
       // --- TEST 5 ---
@@ -69,7 +66,6 @@ const routers = createBrowserRouter([
         path: "/test5", 
         children: [
           { index: true, element: <Test5Page /> },
-          { path: ":id", element: <Test5DetailPage /> }
         ]
       },
       // --- TEST 6 ---

@@ -1,8 +1,17 @@
+// src/components/crad/crad.tsx
 import { Box, Card, CardHeader, CardContent, Typography, CardActions, Button, TextField } from "@mui/material";
 import { ButtonAction, InputAction } from "./action/action";
 
-export default function MovieCard(props: { title?: string; text: string; mode: "input" | "btn" | "null"; onInputChange?: (value: string) => void; onBtnClick?: () => void }) {
-  const { title, text, mode, onInputChange, onBtnClick } = props;
+// 3. คอมโพเนนต์หลักเปลี่ยนชื่อเป็น BoxCrad ตามที่ต้องการ (พร้อมระบุโครงสร้างการรับ Props)
+interface BoxCradProps {
+  title?: string;
+  text: string;
+  mode: "input" | "btn" | "null";
+  onInputChange?: (value: string) => void;
+  onBtnClick?: () => void;
+}
+
+export default function BoxCrad({ title, text, mode, onInputChange, onBtnClick }: BoxCradProps) {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', p: 3 }}>
       <Card 
@@ -46,12 +55,12 @@ export default function MovieCard(props: { title?: string; text: string; mode: "
           </Typography>          
         </CardContent>
 
-        {/* 2. CardActions แยกรูปแบบการทำงานตามโหมด */}
+        {/* ตรวจเช็คเงื่อนไข 3 โหมดพร้อมส่งต่อฟังก์ชันฟอร์ม */}
         {mode === "input" ? (
             <InputAction onInputChange={onInputChange} />
         ) : mode === "btn" ? (
             <ButtonAction onBtnClick={onBtnClick} />
-        ) : mode === "null"}
+        ) : null}
 
       </Card>
     </Box>
